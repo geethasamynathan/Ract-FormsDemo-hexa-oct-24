@@ -7,3 +7,5 @@ const Sample = () => {
     </div>
   );
 };
+
+export default Sample;

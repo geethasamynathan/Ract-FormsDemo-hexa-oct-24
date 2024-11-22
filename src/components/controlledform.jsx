@@ -1,36 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../components/controlledform.css";
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-
   const Validate = () => {
     let formErrors = {};
-    formErrors.email = formData.email ? "" : "Email Required.";
-    // if (formData.email) {
-    //   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //   formErrors.email = emailPattern.test(formData.email)
-    //     ? ""
-    //     : "Please Enter Valid Email";
-    // }
-    formErrors.password = formData.password ? "" : "Please enter the Password";
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
+
+    if (!formData.email) {
+      formErrors.email = "Email Required.";
+    }
+
+    if (!formData.password) {
+      formErrors.password = "Please enter the Password";
+    }
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return false;
+    }
+
+    return true;
   };
   const handleSubmit = (e) => {
     console.log("handleSubmit function called");
     e.preventDefault();
+
     const isValid = Validate();
     console.log("Validation result:", isValid);
+
     if (isValid) {
-      console.log("Validate function called");
-      console.log(`formData: ${JSON.stringify(formData)}`);
+      navigate("/sample");
+      console.log("Form submitted successfully with:", formData);
     } else {
       console.log("Form errors:", errors);
     }
