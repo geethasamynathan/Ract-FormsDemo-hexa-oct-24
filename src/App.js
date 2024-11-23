@@ -6,13 +6,14 @@ import Sample from "./components/sample";
 import FormWithHook from "./components/formwithhook";
 import RegistrationForm from "./components/UseFormWithDynamicFields";
 import RegistrationFromWithDynamicFiedls from "./components/UseFormWithDynamicFields1";
+import DepartmentList from "./components/demowithoutuseEffect";
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<RegistrationFromWithDynamicFiedls />} />
+          <Route path="/" element={<DepartmentList />} />
           <Route path="/sample" element={<Sample />} />
         </Routes>
       </Router>
